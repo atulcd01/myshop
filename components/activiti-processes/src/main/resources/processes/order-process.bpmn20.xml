@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+	xmlns:activiti="http://activiti.org/bpmn" targetNamespace="Examples">
+
+	<process id="orderProcess" name="Order Process">
+		<startEvent id="theStart" />
+		<sequenceFlow sourceRef="theStart" targetRef="Ordered" />
+
+		<userTask id="Ordered" name="Ordered Placed Successfully" activiti:assignee="${order.assignee}">
+			<documentation>Do the first task.</documentation>
+		</userTask>
+
+		<sequenceFlow sourceRef="Ordered" targetRef="Packed" />
+
+		<userTask id="Packed" name="Order has been Packed" activiti:assignee="${order.assignee}" >
+			<documentation>	Work for the second task.</documentation>
+		</userTask>
+
+		<sequenceFlow sourceRef="Packed" targetRef="PackedService" />
+		
+		<serviceTask id="PackedService" name="Java task PackedService" activiti:expression="${exampleBean.doSomething()}"></serviceTask>
+		
+		<sequenceFlow sourceRef="PackedService" targetRef="Shipped" />
+		
+		<userTask id="Shipped" name="Order is Shipped" activiti:assignee="${order.assignee}">
+			<documentation>	Do the third task.</documentation>
+		</userTask>
+
+		<sequenceFlow sourceRef="Shipped" targetRef="Delivered" />
+
+		<userTask id="Delivered" name="Your Order is deliverd successfully" activiti:assignee="${order.assignee}">
+			<documentation>	Work for the second task.	</documentation>
+		</userTask>
+
+		<sequenceFlow sourceRef="Delivered" targetRef="notification" />
+
+		<scriptTask id="notification" name="final Notice" scriptFormat="groovy">
+			<script>
+				println 'finish Process.'
+			</script>
+		</scriptTask>
+
+		<sequenceFlow sourceRef="notification" targetRef="theEnd" />
+		<endEvent id="theEnd" />
+	</process>
+
+</definitions>

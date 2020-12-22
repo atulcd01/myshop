@@ -1,0 +1,127 @@
+
+
+<!-- Large modal -->
+<!-- <button class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
+    Login modal</button> -->
+<div class="modal fade" id="loginModal" tabindex="-1"  aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content_local_demi">
+            <div >
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="loginModalLabel">
+                    Login/Registration </h4>
+            </div>
+            <div >
+            
+            
+            <!-- testing flipkart -->
+				<div class="_1XBjg- row_f ">
+					<div class="Og_iib col col-2-5 _3SWFXF" ng-show="!toogleloginreg">
+						<span class="_1hgiYz"><span>Login</span></span>
+						<p class="_1NJjZd">
+							<span>Get access to your Orders, Wishlist and
+								Recommendations</span>
+						</p>
+					</div>
+					<div class="Og_iib col col-2-5 _3SWFXF" ng-show="toogleloginreg">
+						<span class="_1hgiYz"><span>Signup</span></span>
+						<p class="_1NJjZd">
+							<span>We do not share your personal details with anyone.</span>
+						</p>
+					</div>
+					
+					<div class="Km0IJL col col-3-5" ng-show="!toogleloginreg">
+						<div>
+							<form autocomplete="on">
+								<div class="_39M2dM">
+									<input type="email"  ng-model="email"  autocomplete="off" class="_2zrpKA" value=""><span
+										class="s-YM1W"></span><label class="b5konl"><span>Enter
+											Email/Mobile number</span></label>
+								</div>
+								<div class="_39M2dM">
+									<input type="password" ng-model="password" autocomplete="off"
+										class="_2zrpKA _3v41xv" value=""><span class="s-YM1W"></span><label
+										class="b5konl"><span>Enter Password</span></label><a
+										class="_21JmK0 _1__46T" tabindex="-1"><span>Forgot?</span></a>
+								</div>
+								<div class="_1avdGP">
+									<button class="_2AkmmA _1LctnI _7UHT_c" ng-click="login()">
+										<div class="_2VTdOs _1_qmw3">
+											<svg class="_2zN0mv" viewBox="25 25 50 50">
+												<circle stroke="#fff" class="_1VgS7d" cx="50" cy="50" r="20"
+													fill="none" stroke-width="5" stroke-miterlimit="10"></circle></svg>
+										</div>
+										<span>Login</span>
+									</button>
+								</div>
+								<!-- <div class="puBGSV">
+									<div class="_26prer">OR</div>
+									<button class="_2AkmmA _1LctnI jUwFiZ">Request OTP</button>
+								</div> -->
+								<div class="btn-group btn-group-justified">
+									<a class="_2AkmmA _1LctnI jUwFiZ"
+										href="https://github.com/login/oauth/authorize?client_id=786d4f2e42df47f6be14&redirect_uri=http://localhost:8082/protected/home?a=1"
+										class="btn btn-primary"><span>Facebook</span></a>
+										 <a class="_2AkmmA _1LctnI jUwFiZ" href="#"class="btn btn-danger"><span>Google</span></a>
+								</div>
+								
+								
+								
+								
+								<div class="V7ZJ4E">
+									<a class="oZoRPi" ng-click="toogleloginregf()" href="">New to
+										Shop? Create an account</a>
+								</div>
+							</form>
+						</div>
+					</div>
+					
+					<div class="Km0IJL col col-3-5" ng-show="toogleloginreg">
+						<div>
+							<form name="newRegisterForm" id="reguser" novalidate>
+								<div class="_39M2dM">
+									<input type="text" ng-model="reguser.name"  autocomplete="off" class="_2zrpKA" value=""><span
+										class="s-YM1W"></span><label class="b5konl"><span>Enter
+											Name</span></label>
+								</div>
+								<div class="_39M2dM">
+									<input type="email" ng-model="reguser.email"  autocomplete="off" class="_2zrpKA" value=""><span
+										class="s-YM1W"></span><label class="b5konl"><span>Enter
+											Email</span></label>
+								</div>
+								<div class="_39M2dM">
+									<input type="tel" id="mobile" ng-model="reguser.mobileno" maxlength="10" autocomplete="off" class="_2zrpKA" value=""><span
+										class="s-YM1W"></span><label class="b5konl"><span>Enter
+											Mobile number</span></label>
+								</div>
+								<div class="_39M2dM">
+									<input type="password"  id="password" ng-model="reguser.password" autocomplete="off"
+										class="_2zrpKA _3v41xv" value=""><span class="s-YM1W"></span><label
+										class="b5konl"><span>Enter Password</span></label><a
+										class="_21JmK0 _1__46T" tabindex="-1"></a>
+								</div>
+								<input type="hidden"  ng-model="reguser.role" value="ROLE_ADMIN" />
+								<div class="_1avdGP">
+									<button class="_2AkmmA _1LctnI _7UHT_c" type="submit" ng-click="registerUser()">
+										<div class="_2VTdOs _1_qmw3">
+											<svg class="_2zN0mv" viewBox="25 25 50 50">
+												<circle stroke="#fff" class="_1VgS7d" cx="50" cy="50" r="20"
+													fill="none" stroke-width="5" stroke-miterlimit="10"></circle></svg>
+										</div>
+										<span>CONTINUE</span>
+									</button>
+								</div>
+								<a class="_2AkmmA _1LctnI jUwFiZ" ng-click="toogleloginregf()" href=""><span>Existing User? Log in</span></a>
+								
+							</form>
+						</div>
+					</div>
+					
+					
+				</div>
+
+			</div>
+    </div>
+</div>

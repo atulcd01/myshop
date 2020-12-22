@@ -1,0 +1,35 @@
+<div id="addDlg" class="modal fade" tabindex="-1" 
+
+role="dialog" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" 
+
+        data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Add Category Dialog</h4>
+      </div>
+      <div class="modal-body">
+         <form>
+            <div class="form-group">
+           
+            <label for="productId">Category Id</label>
+            {{productId}}<br>
+               <label for="productName">Category Name</label>
+               <input type="text" class="form-control" ng-model="productName" 
+
+                placeholder="Product Name">
+                
+           <!--  <input type="checkbox" ng-model="isProduct"/>  
+            <label for="productId">Are you adding a product..</label> -->
+            </div>
+            <button class="btn btn-default" 
+
+            ng-click="modalButtonClick('#addDlg')">Take Action</button>
+         </form>
+      </div>
+    </div>
+  </div>
+</div>
+

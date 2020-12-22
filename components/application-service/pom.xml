@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project >
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.1.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+	</parent>
+    <groupId>com.educational.application.properties</groupId>
+    <artifactId>application-service</artifactId>
+    <version>1.0.0</version>
+    <name>ApplicationProperties</name>
+    <description>Store ApplicationProperties microservice</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <spring-cloud.version>Greenwich.RC2</spring-cloud.version>
+	<docker.image.prefix>localshop</docker.image.prefix>
+	<docker.resource.targetPath>/</docker.resource.targetPath>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+		 <dependency>
+		     <groupId>org.springframework.boot</groupId>
+		     <artifactId>spring-boot-starter-data-redis</artifactId>
+		  </dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-mongodb</artifactId>
+		</dependency>
+		
+		
+
+		<dependency>
+		    <groupId>org.springdoc</groupId> 
+		    <artifactId>springdoc-openapi-core</artifactId>
+		    <version>1.1.44</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springdoc</groupId>
+		    <artifactId>springdoc-openapi-ui</artifactId>
+		    <version>1.1.44</version>
+		</dependency> 
+
+	</dependencies>
+<dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<!--<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.2.8</version>
+				<configuration>
+					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+					<dockerDirectory>src/main/docker</dockerDirectory>
+					<serverId>docker-hub</serverId>
+					<registryUrl>https://index.docker.io/v1/</registryUrl>
+					<image>${docker.image.prefix}/${project.artifactId}</image>
+					<newName>${docker.image.prefix}/${project.artifactId}:${project.version}</newName>
+					<forceTags>true</forceTags>
+					<resources>
+						<resource>
+							<targetPath>${docker.resource.targetPath}</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+			  <groupId>com.spotify</groupId>
+			  <artifactId>dockerfile-maven-plugin</artifactId>
+			  <version>${dockerfile-maven-version}</version>
+			  <executions>
+				<execution>
+				  <id>default</id>
+				  <goals>
+					<goal>build</goal>
+					<goal>push</goal>
+				  </goals>
+				</execution>
+			  </executions>
+			  <configuration>
+				<repository>${docker.image.prefix}/${project.artifactId}</repository>
+				<tag>${project.version}</tag>
+				<buildArgs>
+				  <JAR_FILE>${project.build.finalName}-jar-with-dependencies.jar</JAR_FILE>
+				</buildArgs>
+			  </configuration>
+			</plugin> -->
+			
+			
+			<plugin>
+			  <groupId>io.fabric8</groupId>
+			  <artifactId>docker-maven-plugin</artifactId>
+			  <version>0.25.2</version>
+			  <configuration>
+				<filter>${*}</filter>
+				<images>
+				  <image>
+					<name>${docker.image.prefix}/${project.artifactId}:${project.version}</name>
+					<build>
+					<dockerFileDir>${project.basedir}</dockerFileDir>
+					<tags>
+						<!--<tag>latest</tag>-->
+						<tag>${project.version}</tag>
+					</tags>
+					</build>
+				  </image>
+
+				</images>
+			  </configuration>
+			</plugin>
+			
+			<plugin>
+		        <groupId>external.atlassian.jgitflow</groupId>
+		        <artifactId>jgitflow-maven-plugin</artifactId>
+		        <version>1.0-m5.1</version>
+		        <configuration>
+		            <flowInitContext>
+		                <masterBranchName>master</masterBranchName>
+		                <developBranchName>development</developBranchName>
+		                <featureBranchPrefix>feature-</featureBranchPrefix>
+		                <releaseBranchPrefix>release-</releaseBranchPrefix>
+		                <hotfixBranchPrefix>hotfix-</hotfixBranchPrefix>
+		                <versionTagPrefix>version-</versionTagPrefix>
+		            </flowInitContext>
+					<username>atulcd01</username>
+		            <password>?T4wU#*s</password>
+		            <noDeploy>true</noDeploy>
+		            <squash>true</squash>
+		            <scmCommentPrefix>[RELEASE] </scmCommentPrefix>
+		        </configuration>
+		    </plugin>
+		</plugins>
+		
+
+	</build>
+
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+        </repository>
+    </repositories>
+
+</project>

@@ -1,0 +1,125 @@
+version: "3"
+services:
+  mongo:
+    container_name: mongodb
+    image: mongo:3.2.11
+    ports:
+      - "27017:27017"
+    volumes:
+    - ./components/data/db/mongo:/data/db
+    networks:
+      - shared-net
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - "6379:6379"
+    volumes:
+    - ./components/data/db/redis:/var/lib/redis
+    networks:
+      - shared-net
+    restart: always
+  application-service:
+    image: localshop/application-service:1.0.0
+    container_name: application-service
+    depends_on:
+      - mongo
+      - redis
+    networks:
+      - shared-net
+    restart: always
+  category-service:
+    image: localshop/catalog-service:1.0.0
+    container_name: category-service
+    depends_on:
+      - mongo
+      - redis
+    networks:
+      - shared-net
+    restart: always
+    ports:
+      - "8000:8080"
+  content-service:
+    image: localshop/content-management:1.0.0
+    container_name: content-service
+    depends_on:
+      - mongo
+      - redis
+    networks:
+      - shared-net
+    restart: always
+    volumes:
+      - ./components/data/img:/home/shop/img
+  activiti-processes:
+    image: localshop/activiti-processes:1.0.0
+    container_name: activiti-processes
+    networks:
+      - shared-net
+    restart: always
+    volumes:
+      - ./components/data/h2:/home/h2
+  cart-service:
+    image: localshop/cart-service:1.0.0
+    container_name: cart-service
+    depends_on:
+      - mongo
+      - redis
+    networks:
+      - shared-net
+    restart: always
+  order-service:
+    image: localshop/order-service:1.0.0
+    container_name: order-service
+    depends_on:
+      - mongo
+      - redis
+    networks:
+      - shared-net
+    restart: always
+    volumes:
+      - ./components/data/h2:/home/h2
+  search-service:
+    image: localshop/search-service:1.0.0
+    container_name: search-service
+    depends_on:
+      - mongo
+      - redis
+    networks:
+      - shared-net
+    restart: always
+  shop-application:
+    image: localshop/shop-application:1.0.0
+    container_name: shop-application
+    networks:
+      - shared-net
+    restart: always
+    volumes:
+      - ./components/data/h2:/home/linux/docker/h2
+
+
+  nginx:
+    image: "nginx:1.15.8-alpine"
+    networks:
+      - shared-net
+    volumes:
+      - ./components/nginx/conf/nginx.conf:/etc/nginx/nginx.conf
+      - ./components/nginx/html:/usr/share/nginx/html
+    ports:
+      - "80:80"
+      - "443:443"
+    container_name: nginx
+    links:
+      - application-service
+      - category-service
+    depends_on:
+      - application-service
+      - category-service
+      - shop-application
+      - search-service
+      - order-service
+      - cart-service
+      - activiti-processes
+      - content-service
+networks:
+  shared-net:
+    driver: bridge

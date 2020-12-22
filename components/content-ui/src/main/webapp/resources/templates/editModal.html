@@ -1,0 +1,57 @@
+<div id="editDlg" class="modal fade" tabindex="-1" 
+
+role="dialog" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" 
+
+        data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Edit Product Dialog</h4>
+      </div>
+      <div class="modal-body">
+         <form>
+            <div class="form-group">
+          <!--  {{data.breadcrumb}}<br> -->
+            <label for="productId">Product Id</label>
+            {{data.id}}<br>
+               <label for="productName">Product Name</label>
+               <input type="text" class="form-control" ng-model="data.name" 
+                placeholder="Product name">
+              <label for="data.someadditionalattr.prize">Prize</label>
+               <input type="text" class="form-control" ng-model="data.someadditionalattr.prize" 
+                placeholder="Product name">
+                
+                <label for="">Upload Image</label>
+                <input type="file" id="control" onchange = "angular.element(this).scope().fileSelected(this)" />
+
+					<br/>
+
+					<div class="row" style='padding : 1px 2px 3px 4px' ng-repeat="element in data.productSpecification">
+					  <div class="col-sm-3"><input type="text" class="form-control"  ng-model="element.name"
+			                placeholder="{{element.name}}"></div>
+					  <div class="col-sm-6"><input type="text" class="form-control"  ng-model="element.value"
+			                placeholder="{{element.value}}"></div>
+			          <div class="col-sm-3">      
+			           <button class="btn btn-default" ng-click="data.productSpecification.splice($index, 1)">Delete Item</button>
+			           </div>
+					</div>
+						
+					<b>Click here to add Textbox:</b><br/><button class="btn btn-default" ng-click="newItem(data)">New Item</button>
+					<br/>
+					<br/>
+               
+                
+                
+                
+            </div>
+            <button class="btn btn-default" 
+
+            ng-click="modalButtonClick('#editDlg')">Take Action</button>
+         </form>
+      </div>
+    </div>
+  </div>
+</div>
+

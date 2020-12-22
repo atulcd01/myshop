@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project >
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>search-service</groupId>
+	<artifactId>search-service</artifactId>
+	<version>1.0.0</version>
+	<packaging>jar</packaging>
+<properties>
+		<java.version>1.8</java.version>
+		<docker.image.prefix>localshop</docker.image.prefix>
+		<docker.resource.targetPath>/</docker.resource.targetPath>
+	</properties>
+	<name>search-service</name>
+	<description>Demo Project for Spring Boot with Apache Tiles</description>
+
+
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.4.RELEASE</version>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+		</dependency>
+		<!-- <dependency>
+		     <groupId>org.springframework.boot</groupId>
+		     <artifactId>spring-boot-starter-data-redis</artifactId> 
+		 </dependency> -->
+		 <dependency>
+		     <groupId>org.springframework.boot</groupId>
+		     <artifactId>spring-boot-starter-data-redis</artifactId>
+		  </dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-mongodb</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-jsp</artifactId>
+			<version>3.0.7</version>
+		</dependency>
+	<!--Swagger dependency-->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.8.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.8.0</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+			  <groupId>io.fabric8</groupId>
+			  <artifactId>docker-maven-plugin</artifactId>
+			  <version>0.25.2</version>
+			  <configuration>
+				<filter>${*}</filter>
+				<images>
+				  <image>
+					<name>${docker.image.prefix}/${project.artifactId}:${project.version}</name>
+					<build>
+					<dockerFileDir>${project.basedir}</dockerFileDir>
+					<tags>
+						<!--<tag>latest</tag>-->
+						<tag>${project.version}</tag>
+					</tags>
+					</build>
+				  </image>
+
+				</images>
+			  </configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+</project>

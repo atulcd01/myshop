@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+    <!-- Master -->
+    <definition name="master.page" template="/public/template/master.jsp">
+        <put-attribute name="header" value="/public/template/header.jsp"/>
+        <put-attribute name="footer" value="/public/template/footer.jsp"/>
+    </definition>
+    
+    <!-- Cart -->
+    <definition name="cart.page" template="/public/template/master.jsp">
+    <put-attribute name="header" value="/public/template/headerOth.jsp"/>
+        <put-attribute name="footer" value="/public/template/footer.jsp"/>
+    </definition>
+<!-- Order -->
+    <definition name="order.page" template="/public/template/master.jsp">
+    <put-attribute name="header" value="/public/template/ordheader.jsp"/>
+     <put-attribute name="footer" value="/public/template/footer.jsp"/>
+    </definition>
+    <!--  Pages -->
+    <definition name="productsList" extends="master.page">
+        <put-attribute name="body" value="/protected/products/products.jsp"/>
+    </definition>
+    <definition name="welcomePage" extends="master.page">
+        <put-attribute name="body" value="/protected/welcomePage.jsp"/>
+    </definition>
+    <definition name="viewPage" extends="master.page">
+        <put-attribute name="body" value="/protected/products/viewPage.jsp"/>
+    </definition>
+     <definition name="cartPage" extends="cart.page">
+        <put-attribute name="body" value="/protected/cart/cartPage.jsp"/>
+    </definition>
+    <definition name="orderPage" extends="order.page">
+        <put-attribute name="body" value="/protected/order/orderPage.jsp"/>
+    </definition>
+    <definition name="orderProcessPage" extends="order.page">
+        <put-attribute name="body" value="/protected/order/orderProcessPage.jsp"/>
+    </definition>
+    <definition name="viewOrder" extends="master.page">
+        <put-attribute name="body" value="/protected/order/viewOrder.jsp"/>
+    </definition>
+    <definition name="trackOrder" extends="master.page">
+        <put-attribute name="body" value="/protected/order/trackOrder.jsp"/>
+    </definition>
+    
+   
+    
+    <definition name="login" extends="master.page">
+        <put-attribute name="header" value=""/>
+        <put-attribute name="footer" value=""/>
+        <put-attribute name="body" value="/public/login.jsp"/>
+    </definition>
+</tiles-definitions>
